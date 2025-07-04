@@ -21,6 +21,10 @@ Whether you're a tourist, commuter, student, or adventurer — GeoNarrator makes
 - Destination: Mahabalipuram, India
 
 **GeoNarrator Output:**
+
+**Expected UI**
+![GeoNarrator UI](./assets/ui-preview.jpeg)
+
 ```json
 [
   {
