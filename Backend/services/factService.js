@@ -1,43 +1,34 @@
-// services/factService.js
 const axios = require('axios');
 
 /**
- * Get historical events within 20 km of a given lat/lon using Wikidata SPARQL.
+ * Get a short Wikipedia summary for any city/place
  */
-exports.getHistoricalFacts = async (lat, lon, radius = 20) => {
-  const sparqlQuery = `
-    SELECT ?event ?eventLabel ?coord ?time ?desc WHERE {
-      ?event wdt:P31 wd:Q1190554.     # instance of historical event
-      ?event wdt:P625 ?coord.
-      OPTIONAL { ?event wdt:P585 ?time. }
-      OPTIONAL { ?event schema:description ?desc FILTER (lang(?desc) = "en") }
-      SERVICE wikibase:around {
-        ?event wdt:P625 ?loc .
-        bd:serviceParam wikibase:center "Point(${lon} ${lat})"^^geo:wktLiteral .
-        bd:serviceParam wikibase:radius "${radius}" .
-      }
-      SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-    }
-    LIMIT 5
-  `;
+exports.getWikipediaSummary = async (placeName) => {
+  const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(placeName)}`;
 
-  const encodedQuery = encodeURIComponent(sparqlQuery);
-  const url = `https://query.wikidata.org/sparql?query=${encodedQuery}`;
-  
   try {
-    const res = await axios.get(url, {
-      headers: { Accept: 'application/sparql-results+json' }
-    });
+    const res = await axios.get(url);
+    const data = res.data;
 
-    return res.data.results.bindings.map((item) => ({
-      title: item.eventLabel?.value,
-      summary: item.desc?.value || 'No summary available.',
-      date: item.time?.value || null,
-      lat,
-      lon
-    }));
+    return {
+      title: data.title,
+      summary: splitIntoParagraphs(data.extract),
+      sourceUrl: data.content_urls?.desktop?.page || null
+    };
   } catch (err) {
-    console.error("Wikidata SPARQL failed:", err.message);
-    return [];
+    console.error(`Wikipedia fetch failed for ${placeName}:`, err.message);
+    return null;
   }
 };
+
+// Utility to split a paragraph into smaller ones
+function splitIntoParagraphs(text) {
+  const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+  const chunks = [];
+
+  for (let i = 0; i < sentences.length; i += 2) {
+    chunks.push((sentences[i] || '') + ' ' + (sentences[i + 1] || ''));
+  }
+
+  return chunks; // Returns array of 2-sentence paragraphs
+}

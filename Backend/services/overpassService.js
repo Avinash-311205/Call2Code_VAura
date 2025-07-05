@@ -9,7 +9,7 @@ const axios = require('axios');
  * @param {Number} lon  Longitude
  * @param {Number} radiusM  Radius in metres (20 km = 20000)
  */
-exports.getPois = async (lat, lon, radiusM = 20000) => {
+exports.getPois = async (lat, lon, radiusM = 15000) => {
   // Overpass QL query. `~"^(temple|museum|monument|fort)$"` matches values.
   const query = `
     [out:json][timeout:25];
