@@ -6,6 +6,12 @@
 
 ---
 
+## Problem Statement - 
+
+**API Remix**
+
+---
+
 ## 🧠 What is GeoNarrator?
 
 **GeoNarrator** transforms everyday travel into a meaningful learning experience. By analyzing your route and combining it with publicly available data from Wikipedia, the app narrates short and fascinating facts about historical landmarks, cultural sites, and notable places along the way.
@@ -84,6 +90,22 @@ Whether you're a tourist, commuter, student, or adventurer — GeoNarrator makes
    - Used to extract meaningful place names for fetching facts.
    - [Documentation](https://nominatim.org/release-docs/latest/api/Reverse/)
 
+---
+
+## Output Images
+
+![Home Page](./assets/HomePage)
+
+![Mao](./assets/Map)
+
+![Light Mode with Different Language](./assets/Map1)
+
+![Nearest Landmarks Along the Route](./assets/Landmarks)
+
+![Facts About the Places](./assets/Facts)
+
+---
+
 ## ⚙️ Backend Setup & Testing
 
 1. **Clone the Repository**
@@ -99,3 +121,12 @@ Whether you're a tourist, commuter, student, or adventurer — GeoNarrator makes
 4. **Run the Server**
    ```bash
    node app.js
+
+## ⚙️ Frontend Setup & Testing
+1. **Install the NPM Packages**
+   ```bash
+   npm install
+2. **Run the Server**
+   ```bash
+   npm run build
+---
