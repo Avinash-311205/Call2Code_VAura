@@ -94,15 +94,15 @@ Whether you're a tourist, commuter, student, or adventurer — GeoNarrator makes
 
 ## Output Images
 
-![Home Page](./assets/HomePage)
+![Home Page](./assets/HomePage.png)
 
-![Mao](./assets/Map)
+![Mao](./assets/Map.png)
 
-![Light Mode with Different Language](./assets/Map1)
+![Light Mode with Different Language](./assets/Map1.png)
 
-![Nearest Landmarks Along the Route](./assets/Landmarks)
+![Nearest Landmarks Along the Route](./assets/Landmarks.png)
 
-![Facts About the Places](./assets/Facts)
+![Facts About the Places](./assets/Facts.png)
 
 ---
 
